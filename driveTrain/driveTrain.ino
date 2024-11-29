@@ -53,20 +53,6 @@ void setup() {
     bluepadStartup();
 }
 
-void IRAM_ATTR handleSwitching(int switchVal) {
-    if (swtichVal == HIGH) {
-        Serial.println("Going into Manual Mode");
-        changeToManual();
-    } else {
-        Serial.println("Going into CV Mode");
-        changeToCV();
-    }
-}
-
-void IRAM_ATTR handleAuto() {
-    // enter auto function here 
-}
-
 void loop() {
     // nothing for now 
     vTaskDelay(20/portTICK_PERIOD_MS);
@@ -88,4 +74,18 @@ void changeToManual() {
 
 void changeToCV() {
     // function to change to CV
+}
+
+void IRAM_ATTR handleSwitching(int switchVal) {
+    if (swtichVal == HIGH) {
+        Serial.println("Going into Manual Mode");
+        changeToManual();
+    } else {
+        Serial.println("Going into CV Mode");
+        changeToCV();
+    }
+}
+
+void IRAM_ATTR handleAuto() {
+    // enter auto function here 
 }
