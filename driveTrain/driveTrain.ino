@@ -47,7 +47,6 @@ void setup() {
     // attach interupt to enable auto 
     attachInterupt(autoButtonPin, handleAuto, FALLING);
     // attach interupt for led 
-    attachInterupt()
 
 
     bluepadStartup();
@@ -58,13 +57,14 @@ void loop() {
     vTaskDelay(20/portTICK_PERIOD_MS);
 }
 
-// moves motors 
-void moveMotor() {
-    for (int i; i < 3; i++) {
-        analogWrite(motorPins[i][0], motorSpeeds.rSpeed);
-        analogWrite(motorPins[i][1], motorSpeeds.lSpeed);
+void IRAM_ATTR handleSwitching(int switchVal) {
+    if (swtichVal == HIGH) {
+        Serial.println("Going into Manual Mode");
+        changeToManual();
+    } else {
+        Serial.println("Going into CV Mode");
+        changeToCV();
     }
-
 }
 
 void changeToManual() {
@@ -74,16 +74,7 @@ void changeToManual() {
 
 void changeToCV() {
     // function to change to CV
-}
-
-void IRAM_ATTR handleSwitching(int switchVal) {
-    if (swtichVal == HIGH) {
-        Serial.println("Going into Manual Mode");
-        changeToManual();
-    } else {
-        Serial.println("Going into CV Mode");
-        changeToCV();
-    }
+    Serial.println("In CV mode rn")
 }
 
 void IRAM_ATTR handleAuto() {
